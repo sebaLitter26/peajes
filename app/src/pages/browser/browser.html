@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar color="morado">
+    <ion-title>Internet</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-content padding>
+
+    <ion-item>
+      <ion-label floating>URL</ion-label>
+      <ion-input type="url" [(ngModel)]="url"></ion-input>
+    </ion-item>
+
+    <button ion-button block clear (click)="openWebpage(url)">Open Webpage</button>
+
+
+
+</ion-content>

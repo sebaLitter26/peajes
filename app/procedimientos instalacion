@@ -1,0 +1,63 @@
+npm install
+
+sudo npm rebuild node-sass
+npm install @ionic/app-scripts@latest
+
+ionic cordova platform add android
+
+ionic cordova build android
+chown -R seba:seba *
+
+
+chmod 777 -R '/home/seba/Escritorio/Ionic APP/tienda1'
+
+
+
+ionic cordova plugin add onesignal-cordova-plugin
+npm install --save @ionic-native/onesignal
+
+ionic cordova plugin add cordova-plugin-geolocation --variable GEOLOCATION_USAGE_DESCRIPTION="To locate you"
+npm install --save @ionic-native/geolocation
+
+
+//cambiar build.gradle
+
+compile project(':CordovaLib')
+
+
+export ANDROID_HOME=/home/seba/Android/Sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+
+
+
+distributionUrl=https\://services.gradle.org/distributions/gradle-3.5-all.zip
+
+
+
+ionic generate page Nombre
+
+//mandar push
+php onesignal.php "1889f3a6-ee6d-412e-ac5e-ac42c951b505" "titulo" "mensaje a mostrar"  "MSU" "34434"
+
+
+
+keytool -genkey -v -keystore avelo-release-key.keystore -alias AveloGO -keyalg RSA -keysize 2048 -validity 10000Introduzca la contraseña del almacén de claves:
+
+contraseña : belgrano782
+
+Volver a escribir la contraseña nueva:
+¿Cuáles son su nombre y su apellido?
+  [Unknown]:  sebastian litter
+¿Cuál es el nombre de su unidad de organización?
+  [Unknown]:  avelo
+¿Cuál es el nombre de su organización?
+  [Unknown]:  avelo
+¿Cuál es el nombre de su ciudad o localidad?
+  [Unknown]:  moron
+¿Cuál es el nombre de su estado o provincia?
+  [Unknown]:  buenos aires
+¿Cuál es el código de país de dos letras de la unidad?
+  [Unknown]:  54
+¿Es correcto CN=sebastian litter, OU=avelo, O=avelo, L=moron, ST=buenos aires, C=54?
+  [no]:  si

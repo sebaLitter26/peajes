@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5",
+    "outDir": "./dist"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "files": [
+    "src/index.ts",
+    "src/ionic-audio.module.ts",
+    "src/ionic-audio-web-track.ts",
+    "src/ionic-audio-track-progress-component.ts",
+    "src/ionic-audio-track-play-component.ts",
+    "src/ionic-audio-track-component.ts",
+    "src/ionic-audio-time-pipe.ts",
+    "src/ionic-audio-providers.ts",
+    "src/ionic-audio-interfaces.ts",
+    "src/ionic-audio-cordova-track.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
+}

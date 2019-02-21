@@ -1,0 +1,137 @@
+<ion-header>
+
+  <ion-navbar>
+    <span *ngIf= "candado == 'lock' " class="licencia">LICENCIA:<br> {{this._cm.licencia}} </span>
+    <ion-buttons start>
+      <button ion-button
+              *ngIf="_us.activo()"
+              (click)="this.borrar_usuario()">
+            Borrar <br> Cuenta
+      </button>
+    </ion-buttons>
+
+
+    <ion-title>
+      Comandos
+    </ion-title>
+  <!--
+    <ion-buttons end>
+
+      <button ion-button icon-only
+              (click)="_cs.ver_carrito()">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge color="danger"
+                   class="carrito-numero"
+                   *ngIf="_cs.items.length > 0">
+                {{ _cs.items.length }}
+        </ion-badge>
+      </button>
+
+      &nbsp;
+      &nbsp;
+
+    </ion-buttons>
+  -->
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content center>
+
+    <ion-row>
+
+      <ion-col >
+
+            <button ion-button large  icon-only color="light"
+                    (click)="_cm.obtener_viaje()"
+                    *ngIf= " this.candado == 'lock'" >
+              <div class="contenidobotones">
+                <img src="assets/icon/obtener_viaje.jpeg">
+                <br>
+                <ion-label center class="etiqueta"  >Obtener <br>Viaje</ion-label>
+              </div>
+            </button>
+
+      </ion-col>
+
+    <ion-col >
+
+        <button ion-button large  icon-only color="light"
+                (click)="_cm.obtener_parada()"
+                *ngIf= " candado == 'lock' " >
+              <div class="contenidobotones">
+                <img src="assets/icon/parada.jpeg">
+                <br>
+                <ion-label center class="etiqueta"  >Obtener <br>Parada</ion-label>
+              </div>
+        </button>
+
+    </ion-col>
+
+
+    <ion-col >
+          <button ion-button large  icon-only color="light"
+                  (click)="pantalla()">
+                    <div class="contenidobotones">
+                      <img src="assets/icon/{{candado}}.jpeg">
+                      <br>
+                      <ion-label center class="etiqueta"  >{{ this.ponersacar }} <br>Frecuencia</ion-label>
+                    </div>
+          </button>
+    </ion-col>
+
+  </ion-row>
+
+
+
+
+<!--  Boton para llamar a CENTRAL -->
+  <ion-footer align="right" no-border padding>
+      <ion-buttons>
+          <!--
+            <button ion-button icon-only large round color="light"
+                    (click)="llamar_central()" >
+              <ion-icon name=call ></ion-icon>
+            </button>
+            <button ion-button large round danger (touchend)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+            holdclick
+            -->
+            <button ion-button large draggable="true" round [color]="recording ? 'danger' : 'primary'" (dragleave)="stopRecord($event)"><ion-icon  [name]="recording ? 'mic-off' : 'mic'"></ion-icon>&nbsp;&nbsp;Radio</button>
+      </ion-buttons>
+
+
+  </ion-footer>
+
+
+
+
+
+  <!--
+  <ion-grid>
+
+    <ion-row *ngFor="let pares of _ps.productos">
+      <ion-col *ngFor="let item of pares"
+              [navParams]="{ producto: item }"
+              [navPush]="productoPage">
+       <img [src]="item.codigo | imagen">
+        <p>
+          {{ item.producto }}
+          <br>
+          {{ item.precio_compra | currency:'USD':true }}
+        </p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+  <ion-infinite-scroll (ionInfinite)="siguiente_pagina($event)">
+     <ion-infinite-scroll-content></ion-infinite-scroll-content>
+   </ion-infinite-scroll>
+-->
+
+
+
+
+</ion-content>

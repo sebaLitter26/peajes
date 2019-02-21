@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar color="morado">
+    <ion-title>Mensaje Recibido</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h1>{{ msj.titulo }}</h1>
+
+  <p>
+      {{ msj.contenido }}
+  </p>
+
+  <button ion-button
+          block
+          color="primary"
+          (click)="manda_evento(2)">
+    Cancelar
+  </button>
+
+  <button ion-button
+          block
+          color="danger"
+          (click)="manda_evento(4)">
+    Negativo
+  </button>
+
+
+
+
+</ion-content>

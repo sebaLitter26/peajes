@@ -1,0 +1,377 @@
+import { Injectable, Optional } from '@angular/core';
+window.AudioContext = window['AudioContext'] || window['webkitAudioContext'];
+/**
+ * Creates an HTML5 audio track
+ *
+ * @export
+ * @class WebAudioTrack
+ * @constructor
+ * @implements {IAudioTrack}
+ */
+var WebAudioTrack = (function () {
+    function WebAudioTrack(src, preload) {
+        if (preload === void 0) { preload = 'none'; }
+        // audio context not needed for now
+        // @Optional() private ctx: AudioContext = undefined
+        // this.ctx = this.ctx || new AudioContext();
+        this.src = src;
+        this.preload = preload;
+        this.isPlaying = false;
+        this.isFinished = false;
+        this._progress = 0;
+        this._completed = 0;
+        this.createAudio();
+    }
+    WebAudioTrack.prototype.createAudio = function () {
+        var _this = this;
+        this.audio = new Audio();
+        this.audio.src = this.src;
+        this.audio.preload = this.preload;
+        //this.audio.controls = true;
+        //this.audio.autoplay = false;
+        this.audio.addEventListener("timeupdate", function (e) { _this.onTimeUpdate(e); }, false);
+        this.audio.addEventListener("error", function (err) {
+            console.log("Audio error => track " + _this.src, err);
+            _this.isPlaying = false;
+        }, false);
+        this.audio.addEventListener("canplay", function () {
+            _this._isLoading = false;
+            _this._hasLoaded = true;
+        }, false);
+        this.audio.addEventListener("playing", function () {
+            console.log("Playing track " + _this.src);
+            _this.isFinished = false;
+            _this.isPlaying = true;
+        }, false);
+        this.audio.addEventListener("ended", function () {
+            _this.isPlaying = false;
+            _this.isFinished = true;
+            _this._progress = 0;
+            _this._completed = 0;
+            _this._hasLoaded = false;
+            //this.destroy();
+            console.log('Finished playback');
+        }, false);
+        this.audio.addEventListener("durationchange", function (e) {
+            _this._duration = e.target.duration;
+        }, false);
+    };
+    WebAudioTrack.prototype.onTimeUpdate = function (e) {
+        if (this.isPlaying && this.audio.currentTime > 0) {
+            this._progress = this.audio.currentTime;
+            this._completed = this.audio.duration > 0 ? Math.trunc(this.audio.currentTime / this.audio.duration * 100) / 100 : 0;
+        }
+    };
+    WebAudioTrack.formatTime = function (value) {
+        var s = Math.trunc(value % 60);
+        var m = Math.trunc((value / 60) % 60);
+        var h = Math.trunc(((value / 60) / 60) % 60);
+        return h > 0 ? (h < 10 ? '0' + h : h) + ":" + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s) : (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s);
+    };
+    Object.defineProperty(WebAudioTrack.prototype, "id", {
+        /**
+         * Gets the track id
+         *
+         * @property id
+         * @type {number}
+         */
+        get: /**
+           * Gets the track id
+           *
+           * @property id
+           * @type {number}
+           */
+        function () {
+            return this._id;
+        },
+        /**
+         * Sets the track id
+         *
+         * @property id
+         */
+        set: /**
+           * Sets the track id
+           *
+           * @property id
+           */
+        function (v) {
+            this._id = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "duration", {
+        /**
+         * Gets the track duration, or -1 if it cannot be determined
+         *
+         * @property duration
+         * @readonly
+         * @type {number}
+         */
+        get: /**
+           * Gets the track duration, or -1 if it cannot be determined
+           *
+           * @property duration
+           * @readonly
+           * @type {number}
+           */
+        function () {
+            return this._duration;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "progress", {
+        /**
+         * Gets current track time (progress)
+         *
+         * @property progress
+         * @readonly
+         * @type {number}
+         */
+        get: /**
+           * Gets current track time (progress)
+           *
+           * @property progress
+           * @readonly
+           * @type {number}
+           */
+        function () {
+            return this._progress;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "completed", {
+        /**
+         * Gets current track progress as a percentage
+         *
+         * @property completed
+         * @readonly
+         * @type {number}
+         */
+        get: /**
+           * Gets current track progress as a percentage
+           *
+           * @property completed
+           * @readonly
+           * @type {number}
+           */
+        function () {
+            return this._completed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "error", {
+        /**
+         * Gets any errors logged by HTML5 audio
+         *
+         * @property error
+         * @readonly
+         * @type {MediaError}
+         */
+        get: /**
+           * Gets any errors logged by HTML5 audio
+           *
+           * @property error
+           * @readonly
+           * @type {MediaError}
+           */
+        function () {
+            return this.audio && this.audio.error;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "canPlay", {
+        /**
+         * Gets a boolean value indicating whether the current source can be played
+         *
+         * @property canPlay
+         * @readonly
+         * @type {boolean}
+         */
+        get: /**
+           * Gets a boolean value indicating whether the current source can be played
+           *
+           * @property canPlay
+           * @readonly
+           * @type {boolean}
+           */
+        function () {
+            var format = "audio/" + this.audio.src.substr(this.audio.src.lastIndexOf('.') + 1);
+            return this.audio && this.audio.canPlayType(format) != '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "isLoading", {
+        /**
+         * Gets a boolean value indicating whether the track is in loading state
+         *
+         * @property isLoading
+         * @readonly
+         * @type {boolean}
+         */
+        get: /**
+           * Gets a boolean value indicating whether the track is in loading state
+           *
+           * @property isLoading
+           * @readonly
+           * @type {boolean}
+           */
+        function () {
+            return this._isLoading;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WebAudioTrack.prototype, "hasLoaded", {
+        /**
+         * Gets a boolean value indicating whether the track has finished loading
+         *
+         * @property hadLoaded
+         * @readonly
+         * @type {boolean}
+         */
+        get: /**
+           * Gets a boolean value indicating whether the track has finished loading
+           *
+           * @property hadLoaded
+           * @readonly
+           * @type {boolean}
+           */
+        function () {
+            return this._hasLoaded;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Plays current track
+     *
+     * @method play
+     */
+    /**
+       * Plays current track
+       *
+       * @method play
+       */
+    WebAudioTrack.prototype.play = /**
+       * Plays current track
+       *
+       * @method play
+       */
+    function () {
+        if (!this.audio) {
+            this.createAudio();
+        }
+        if (!this._hasLoaded) {
+            console.log("Loading track " + this.src);
+            this._isLoading = true;
+        }
+        //var source = this.ctx.createMediaElementSource(this.audio);
+        //source.connect(this.ctx.destination);
+        this.audio.play();
+    };
+    /**
+     * Pauses current track
+     *
+     * @method pause
+     */
+    /**
+       * Pauses current track
+       *
+       * @method pause
+       */
+    WebAudioTrack.prototype.pause = /**
+       * Pauses current track
+       *
+       * @method pause
+       */
+    function () {
+        if (!this.isPlaying)
+            return;
+        console.log("Pausing track " + this.src);
+        this.audio.pause();
+        this.isPlaying = false;
+    };
+    /**
+     * Stops current track and releases audio
+     *
+     * @method stop
+     */
+    /**
+       * Stops current track and releases audio
+       *
+       * @method stop
+       */
+    WebAudioTrack.prototype.stop = /**
+       * Stops current track and releases audio
+       *
+       * @method stop
+       */
+    function () {
+        var _this = this;
+        if (!this.audio)
+            return;
+        this.pause();
+        this.audio.removeEventListener("timeupdate", function (e) { _this.onTimeUpdate(e); });
+        this.isFinished = true;
+        //this.destroy();
+    };
+    /**
+     * Seeks to a new position within the track
+     *
+     * @method seekTo
+     * @param {number} time the new position to seek to
+     */
+    /**
+       * Seeks to a new position within the track
+       *
+       * @method seekTo
+       * @param {number} time the new position to seek to
+       */
+    WebAudioTrack.prototype.seekTo = /**
+       * Seeks to a new position within the track
+       *
+       * @method seekTo
+       * @param {number} time the new position to seek to
+       */
+    function (time) {
+        if (!this.audio)
+            return;
+        this.audio.currentTime = time;
+    };
+    /**
+     * Releases audio resources
+     *
+     * @method destroy
+     */
+    /**
+       * Releases audio resources
+       *
+       * @method destroy
+       */
+    WebAudioTrack.prototype.destroy = /**
+       * Releases audio resources
+       *
+       * @method destroy
+       */
+    function () {
+        this.audio = undefined;
+        console.log("Released track " + this.src);
+    };
+    WebAudioTrack.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    WebAudioTrack.ctorParameters = function () { return [
+        null,
+        { type: undefined, decorators: [{ type: Optional },] },
+    ]; };
+    return WebAudioTrack;
+}());
+export { WebAudioTrack };
+//# sourceMappingURL=ionic-audio-web-track.js.map

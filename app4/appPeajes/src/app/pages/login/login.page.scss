@@ -1,0 +1,56 @@
+page-login {
+
+  .toolbar-background {
+  background: transparent;
+  border-color: transparent;
+}
+
+
+.slide-zoom {
+  height: 100%;
+}
+
+.slide-title {
+  margin-top: 2.8rem;
+}
+
+.slide-image {
+  max-height: 50%;
+  max-width: 60%;
+  margin: 45px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+b {
+  font-weight: 500;
+
+}
+
+p {
+  padding: 0 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #60646B;
+
+  b {
+    color: #000000;
+  }
+}
+
+ion-col{
+    position: initial;
+  }
+
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
+
+
+
+
+}

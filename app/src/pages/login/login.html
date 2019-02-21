@@ -1,0 +1,108 @@
+
+
+
+
+
+<ion-content padding>
+
+  <ion-slides pager>
+    <!-- Login Slide -->
+    <ion-slide>
+
+      <ion-toolbar>
+      </ion-toolbar>
+
+
+        <h2 class="slide-title">¿Listo para empezar?</h2>
+
+        <div *ngIf="!muestra_activacion">
+          <ion-list>
+
+            <ion-item>
+              <ion-label floating>Nombre</ion-label>
+              <ion-input type="text" [(ngModel)]="nombre" (keyup.enter)="focusNext($event)"  required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Apellido</ion-label>
+              <ion-input type="text" [(ngModel)]="apellido" (keyup.enter)="focusNext($event)" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Numero de Telefono</ion-label>
+              <ion-input type="number" [(ngModel)]="celular" (keyup.enter)="focusNext($event)" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Acepta los
+                  <button ion-button
+
+                          (click)="modal_terminosYcondiciones()">
+                    Terminos y Condiciones
+                  </button>
+                    </ion-label>
+                <ion-checkbox [(ngModel)]="acepta_terminos" ></ion-checkbox>
+            </ion-item>
+
+          </ion-list>
+
+          <button ion-button
+                  [disabled]=" celular?.length < 10  ||  apellido.length < 2 || nombre.length < 2 || !acepta_terminos"
+                  block
+                  (click)="ingresar()">
+            Ingresar
+          </button>
+
+        </div>
+
+
+
+
+        <div *ngIf="muestra_activacion" >
+
+          <ion-list>
+
+            <ion-item>
+              <ion-label floating>Código de activación</ion-label>
+              <ion-input type="number"  [(ngModel)]="codigo" required></ion-input>
+            </ion-item>
+
+
+          </ion-list>
+
+          <button ion-button
+                  [disabled]=" (codigo?.length != 4 ) "
+                  block
+                  (click)="ingresar_codigo()">
+            Activar
+          </button>
+
+        </div>
+
+        <img src="assets/imgs/taxis.png" class="slide-image"/>
+
+      </ion-slide>
+
+
+      <!-- Seleccionar Licencia Slide -->
+      <ion-slide>
+        <ion-toolbar>
+            <h2 class="slide-title">¿Que licencia desea utilizar?</h2>
+        </ion-toolbar>
+        <ion-grid>
+
+          <ion-item *ngFor="let licencia of licencias" (click)="ir_a_home( licencia )">
+
+                      <p>
+                        {{ licencia.numero }}
+                        <br>
+                        {{ licencia.modelo }}
+                      </p>
+            </ion-item>
+
+
+        </ion-grid>
+
+      </ion-slide>
+    <!-- Fin del último slide -->
+
+  </ion-slides>
+
+</ion-content>

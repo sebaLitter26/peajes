@@ -1,0 +1,8 @@
+{
+  "name": "appPeajes",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "32ff62b9"
+}

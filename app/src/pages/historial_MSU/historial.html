@@ -1,0 +1,52 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mensajes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      {{ _pushProvider.MSU.length }} Mensajes Recibidos
+    </ion-list-header>
+
+
+          <ion-item-sliding  *ngFor="let msj_recibido of _pushProvider.MSU;  let i = index" >
+
+            <ion-item id='{{ msj_recibido.id_msj }}' style.background-color = "{{ msj_recibido.leido==1 ? 'white' : 'blanchedalmond' }}"  (click) ="this.ir_a_pagina(i)">
+
+
+            <!--[navPush]="DetalleMensaje"
+            [navParams]="{ msu: msj_recibido  }">
+
+                 <ion-avatar item-start >
+                   {{msj_recibido.ms}}
+                 </ion-avatar>
+               -->
+                   <item-start>{{msj_recibido.titulo}}</item-start>
+                   <p>{{msj_recibido.contenido}}</p>
+                   <ion-note item-end>
+                     {{ _pushProvider.tiempoAnterior(msj_recibido.fecha) }}
+                   </ion-note>
+               </ion-item >
+
+               <ion-item-options (ionSwipe)="_pushProvider.borrar_mensaje(i)"  >
+
+                 <button ion-button color="danger" expandable (click)="_pushProvider.borrar_mensaje(i)">
+                   <ion-icon name="trash"></ion-icon>
+                   Borrar
+                 </button>
+               </ion-item-options>
+
+
+              </ion-item-sliding>
+
+  </ion-list>
+
+
+</ion-content>

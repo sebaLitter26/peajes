@@ -1,0 +1,8 @@
+{
+  "name": "avelo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "992540997536"
+}

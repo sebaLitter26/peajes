@@ -1,0 +1,20 @@
+
+
+<ion-tabs>
+
+  <ion-tab tabIcon="home" tabTitle="Home" [root]="tab1"></ion-tab>
+  <!-- <ion-tab tabIcon="star" tabTitle="Categorías" [root]="tab2"></ion-tab>
+  <ion-tab tabIcon="list" tabTitle="Ordenes" [root]="tab3"></ion-tab>
+  <ion-tab tabIcon="search" tabTitle="Buscar" [root]="tab4"></ion-tab>
+-->
+  <ion-tab tabIcon="locate" tabTitle="Ubicación" [root]="tab2"></ion-tab>
+
+  <ion-tab tabIcon="mail" tabTitle="Mensajes" [root]="tab3" [tabBadge] = "_pushProvider.msjs_no_leidos>0 ?  _pushProvider.msjs_no_leidos  : null" tabBadgeStyle="danger"></ion-tab>
+
+  <ion-tab tabIcon="call" tabTitle="Llamar" [root]="tab4"></ion-tab>
+
+  <ion-tab tabIcon="bluetooth" tabTitle="Bluetooth" [root]="tab5"></ion-tab>
+
+  <ion-tab tabIcon="planet" tabTitle="Internet" [root]="tab6"></ion-tab>
+
+</ion-tabs>

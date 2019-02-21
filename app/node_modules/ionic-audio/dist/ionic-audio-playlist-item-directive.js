@@ -1,0 +1,59 @@
+import { Directive, Input, Output, HostListener, EventEmitter } from '@angular/core';
+import { AudioProvider } from './ionic-audio-providers';
+/**
+ * Generated class for the AudioPlaylistItemDirective directive.
+ *
+ * See https://angular.io/docs/ts/latest/api/core/index/DirectiveMetadata-class.html
+ * for more info on Angular Directives.
+ */
+var AudioPlaylistItemDirective = (function () {
+    function AudioPlaylistItemDirective(_audioProvider) {
+        this._audioProvider = _audioProvider;
+        this.currentTrackChange = new EventEmitter();
+    }
+    AudioPlaylistItemDirective.prototype.ngOnInit = function () {
+        this._index = AudioPlaylistItemDirective._tracklist.push(this.track) - 1;
+    };
+    AudioPlaylistItemDirective.prototype.onClick = function () {
+        this._play();
+    };
+    AudioPlaylistItemDirective.prototype.next = function () {
+        if (AudioPlaylistItemDirective._currentIndex > -1 && AudioPlaylistItemDirective._currentIndex < AudioPlaylistItemDirective._tracklist.length - 1) {
+            this._play(++AudioPlaylistItemDirective._currentIndex);
+        }
+    };
+    Object.defineProperty(AudioPlaylistItemDirective.prototype, "currentIndex", {
+        get: function () {
+            return AudioPlaylistItemDirective._currentIndex;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AudioPlaylistItemDirective.prototype._play = function (index) {
+        index = index || this._index;
+        console.log('Playing', index);
+        AudioPlaylistItemDirective._currentIndex = index;
+        this.currentTrack = AudioPlaylistItemDirective._tracklist[index];
+        this.currentTrackChange.emit(this.currentTrack);
+    };
+    AudioPlaylistItemDirective._currentIndex = -1;
+    AudioPlaylistItemDirective._tracklist = [];
+    AudioPlaylistItemDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[audio-playlist-item]' // Attribute selector
+                },] },
+    ];
+    /** @nocollapse */
+    AudioPlaylistItemDirective.ctorParameters = function () { return [
+        { type: AudioProvider, },
+    ]; };
+    AudioPlaylistItemDirective.propDecorators = {
+        "track": [{ type: Input },],
+        "currentTrack": [{ type: Input },],
+        "currentTrackChange": [{ type: Output },],
+        "onClick": [{ type: HostListener, args: ['click',] },],
+    };
+    return AudioPlaylistItemDirective;
+}());
+export { AudioPlaylistItemDirective };
+//# sourceMappingURL=ionic-audio-playlist-item-directive.js.map

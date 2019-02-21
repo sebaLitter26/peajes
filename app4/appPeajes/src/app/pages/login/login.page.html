@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <!--
+  <ion-button (click)="login()" expand="block">Login</ion-button>
+  <ion-button expand="block" color="secondary" href="/register" routerDirection="forward">Register</ion-button>
+-->
+
+HOLAA
+
+  <div *ngIf="!auth.isAuthenticated()">
+     <button ion-button block color="primary" (click)="auth.login()"> Log In </button>
+   </div>
+
+
+     <div *ngIf="auth.isAuthenticated()">
+       <button ion-button block color="primary" (click)="auth.logout()">Logout, {{ auth.user.nickname }}</button>
+       <ion-list>
+         <ion-item *ngFor="let item of items">
+           <ion-card>
+             <img src="{{ item.avatar }}">
+             <ion-card-content>
+               <ion-card-title class="card-title">
+                 {{ item.title }}
+               </ion-card-title>
+               <p>
+                 <ion-badge> {{ item.member }} </ion-badge>
+               </p>
+             </ion-card-content>
+           </ion-card>
+         </ion-item>
+       </ion-list>
+     </div>
+
+
+</ion-content>

@@ -1,0 +1,57 @@
+
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button block (click)="this._bt.startScanning()">scan</button>
+    </ion-buttons>
+
+      <ion-title>Conexion Bluetooth</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+
+  <ion-list padding>
+      <div *ngIf="this._bt.pairedDevices?.length > 0">
+        <ion-list-header>
+          Paired Devices
+        </ion-list-header>
+        <ion-list *ngFor="let device of this._bt.pairedDevices">
+            <ion-item>
+                <ion-label floating>Ingrese Comando</ion-label>
+                <ion-input type="text" [(ngModel)]="comando"  (keyup.enter)="this._bt.mandarComando(comando)" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button  color="secondary" (click)="this._bt.mandarComando(comando)">Enviar comando a {{device.name}}</button>
+                <button ion-button color="danger" (click)="this._bt.disconnect()">Desconectar</button>
+            </ion-item>
+
+        </ion-list>
+
+      </div>
+
+
+
+
+    <ion-list-header>
+      Availlable Devices
+    </ion-list-header>
+    <ion-item *ngFor='let device of _bt.unpairedDevices'>
+      <span (click)="this._bt.selectDevice(device.address)">
+        {{device.name}}
+      </span>
+    </ion-item>
+    <ion-spinner name="crescent" *ngIf="this._bt.gettingDevices"></ion-spinner>
+  </ion-list>
+
+
+
+
+
+</ion-content>

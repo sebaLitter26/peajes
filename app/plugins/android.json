@@ -1,0 +1,96 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "android-camera-permission": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-audioinput": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-bluetooth-serial": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "XWALK_VERSION": "23+",
+      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+      "XWALK_MODE": "embedded",
+      "XWALK_MULTIPLEAPK": "true",
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_ANDROID": "AIzaSyCOLPLNra4lzA17qyXlhtOko3RWBnwzMEA",
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-native-ringtones": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-tts": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-uniquedeviceid": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "com.sebalitter.push"
+    }
+  },
+  "dependent_plugins": {}
+}
