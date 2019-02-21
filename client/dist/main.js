@@ -1879,7 +1879,7 @@ var ArtistService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GLOBAL", function() { return GLOBAL; });
 var GLOBAL = {
-    url: 'http://localhost:3977/api/',
+    url: 'http://35.227.126.56:3977/api/',
     ip: '127.0.0.1'
 };
 
